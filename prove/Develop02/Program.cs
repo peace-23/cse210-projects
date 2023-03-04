@@ -1,73 +1,66 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 class Program
 {
     static void Main(string[] args)
     {
-        var promptGenerator = new PromptGenerator();
-        var journalEntries = new List<Entry>();
+        Journal journal = new Journal();
+        PromptGenerator promptGenerator = new PromptGenerator();
 
-        // Continuously prompt the user for input until they exit
         while (true)
         {
-            Console.WriteLine("Enter 'q' to quit, 'p' to generate a prompt, or 'e' to add an entry manually.");
+            Console.WriteLine("Select an option:");
+            Console.WriteLine("1. Create new journal entry");
+            Console.WriteLine("2. Display all journal entries");
+            Console.WriteLine("3. Save journal to CSV file");
+            Console.WriteLine("4. Load journal from CSV file");
+            Console.WriteLine("5. Exit");
 
-            var input = Console.ReadLine();
+            string input = Console.ReadLine();
 
-            if (input == "q")
+            if (input == "1")
             {
-                // Save all entries to file
-                SaveEntriesToFile(journalEntries);
+                string prompt = promptGenerator.GetRandomPrompt();
+
+                Console.WriteLine("Prompt: " + prompt);
+                Console.Write("Response: ");
+                string response = Console.ReadLine();
+                string date = DateTime.Today.ToShortDateString();
+
+                Entry entry = new Entry(prompt, response, date);
+                journal.AddEntry(entry);
+
+                Console.WriteLine("Entry created successfully!");
+            }
+            else if (input == "2")
+            {
+                journal.DisplayEntries();
+            }
+            else if (input == "3")
+            {
+                Console.Write("Enter file name to save journal to: ");
+                string fileName = Console.ReadLine();
+
+                journal.SaveToFile(fileName);
+            }
+            else if (input == "4")
+            {
+                Console.Write("Enter file name to load journal from: ");
+                string fileName = Console.ReadLine();
+
+                journal.LoadFromFile(fileName);
+            }
+            else if (input == "5")
+            {
                 break;
             }
-            else if (input == "p")
+            else
             {
-                // Generate a random prompt and display it to the user
-                var prompt = promptGenerator.GetRandomPrompt();
-                Console.WriteLine(prompt);
-
-                // Allow the user to enter their response
-                var response = Console.ReadLine();
-
-                // Create a new Entry object with the prompt, response, and current date
-                var entry = new Entry(prompt, response, DateTime.Now.ToString());
-
-                // Add the entry to the list of journal entries
-                journalEntries.Add(entry);
+                Console.WriteLine("Invalid input. Please try again.");
             }
-            else if (input == "e")
-            {
-                // Prompt the user for the entry details
-                Console.Write("Enter a prompt: ");
-                var prompt = Console.ReadLine();
-                Console.Write("Enter a response: ");
-                var response = Console.ReadLine();
 
-                // Create a new Entry object with the prompt, response, and current date
-                var entry = new Entry(prompt, response, DateTime.Now.ToString());
-
-                // Add the entry to the list of journal entries
-                journalEntries.Add(entry);
-            }
-        }
-    }
-
-    static void SaveEntriesToFile(List<Entry> entries)
-    {
-        var filePath = "journal_entries.csv";
-
-        using (var writer = new StreamWriter(filePath))
-        {
-            // Write a header row to the file
-            writer.WriteLine("Prompt,Response,Date");
-
-            // Write each entry to the file
-            foreach (var entry in entries)
-            {
-                writer.WriteLine(entry.GetEntryAsCSV());
-            }
+            Console.WriteLine();
         }
     }
 }

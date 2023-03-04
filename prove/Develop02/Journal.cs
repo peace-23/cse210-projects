@@ -1,8 +1,14 @@
-class Journal
+using System;
+public class Journal
 {
     public List<Entry> entries = new List<Entry>();
 
-    public void DisplayJournalEntries()
+    public void AddEntry(Entry entry)
+    {
+        entries.Add(entry);
+    }
+
+    public void DisplayEntries()
     {
         if (entries.Count == 0)
         {
@@ -17,19 +23,33 @@ class Journal
         }
     }
 
-    public void CreateJournalEntry()
+    public void SaveToFile(string filename)
     {
-        Console.Write("Enter prompt: ");
-        string prompt = Console.ReadLine();
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            foreach (Entry entry in entries)
+            {
+                outputFile.WriteLine(entry.GetEntryAsCSV());
+            }
+        }
 
-        Console.Write("Enter response: ");
-        string response = Console.ReadLine();
+        Console.WriteLine("Journal saved to " + filename + " successfully!");
+    }
 
-        string date = DateTime.Today.ToShortDateString();
+    public void LoadFromFile(string filename)
+    {
+        List<Entry> loadedEntries = new List<Entry>();
 
-        Entry entry = new Entry(prompt, response, date);
-        entries.Add(entry);
+        string[] lines = File.ReadAllLines(filename);
 
-        Console.WriteLine("Entry created successfully!");
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(",");
+            Entry entry = new Entry(parts[0], parts[1], parts[2]);
+            loadedEntries.Add(entry);
+        }
+
+        entries = loadedEntries;
+        Console.WriteLine("Journal loaded from " + filename + " successfully!");
     }
 }

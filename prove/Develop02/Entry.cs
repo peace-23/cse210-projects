@@ -1,4 +1,6 @@
-class Entry
+using System;
+
+public class Entry
 {
     public string Prompt { get; set; }
     public string Response { get; set; }
@@ -6,9 +8,9 @@ class Entry
 
     public Entry(string prompt, string response, string date)
     {
-        Prompt = prompt;
-        Response = response;
-        Date = date;
+        this.Prompt = prompt;
+        this.Response = response;
+        this.Date = date;
     }
 
     public void DisplayEntry()
