@@ -5,12 +5,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        Journal journal = new Journal();
+        Journal _journal = new Journal();
         PromptGenerator promptGenerator = new PromptGenerator();
 
         while (true)
         {
-            Console.WriteLine("Select an option:");
+            Console.WriteLine("What would you like to do?");
             Console.WriteLine("1. Create new journal entry");
             Console.WriteLine("2. Display all journal entries");
             Console.WriteLine("3. Save journal to CSV file");
@@ -29,27 +29,27 @@ class Program
                 string date = DateTime.Today.ToShortDateString();
 
                 Entry entry = new Entry(prompt, response, date);
-                journal.AddEntry(entry);
+                _journal.AddEntry(entry);
 
                 Console.WriteLine("Entry created successfully!");
             }
             else if (input == "2")
             {
-                journal.DisplayEntries();
+                _journal.DisplayEntries();
             }
             else if (input == "3")
             {
                 Console.Write("Enter file name to save journal to: ");
                 string fileName = Console.ReadLine();
 
-                journal.SaveToFile(fileName);
+                _journal.SaveToFile(fileName);
             }
             else if (input == "4")
             {
                 Console.Write("Enter file name to load journal from: ");
                 string fileName = Console.ReadLine();
 
-                journal.LoadFromFile(fileName);
+                _journal.LoadFromFile(fileName);
             }
             else if (input == "5")
             {

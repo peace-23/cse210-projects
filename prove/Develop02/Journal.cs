@@ -1,22 +1,22 @@
 using System;
 public class Journal
 {
-    public List<Entry> entries = new List<Entry>();
+    public List<Entry> _entries = new List<Entry>();
 
     public void AddEntry(Entry entry)
     {
-        entries.Add(entry);
+        _entries.Add(entry);
     }
 
     public void DisplayEntries()
     {
-        if (entries.Count == 0)
+        if (_entries.Count == 0)
         {
             Console.WriteLine("There are no entries in the journal.");
             return;
         }
 
-        foreach (Entry entry in entries)
+        foreach (Entry entry in _entries)
         {
             entry.DisplayEntry();
             Console.WriteLine();
@@ -27,7 +27,7 @@ public class Journal
     {
         using (StreamWriter outputFile = new StreamWriter(filename))
         {
-            foreach (Entry entry in entries)
+            foreach (Entry entry in _entries)
             {
                 outputFile.WriteLine(entry.GetEntryAsCSV());
             }
@@ -49,7 +49,7 @@ public class Journal
             loadedEntries.Add(entry);
         }
 
-        entries = loadedEntries;
+        _entries = loadedEntries;
         Console.WriteLine("Journal loaded from " + filename + " successfully!");
     }
 }

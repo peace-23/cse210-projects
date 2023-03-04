@@ -2,7 +2,7 @@ using System;
 
 public class PromptGenerator
 {
-    static List<string> prompts = new List<string>()
+    static List<string> _prompts = new List<string>()
     {
         "What is one thing that made you proud of yourself today?",
         "What did you learned today?",
@@ -21,12 +21,12 @@ public class PromptGenerator
     public string GetRandomPrompt()
     {
         var random = new Random();
-        var index = random.Next(prompts.Count);
-        return prompts[index];
+        var index = random.Next(_prompts.Count);
+        return _prompts[index];
     }
 
     public void AddPrompt(string prompt)
     {
-        prompts.Add(prompt);
+        _prompts.Add(prompt);
     }
 }
