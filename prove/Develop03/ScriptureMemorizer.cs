@@ -1,8 +1,8 @@
-public class ScriptureMemorizer
+public class Memorizer
 {
     private List<Scripture> _scriptures;
 
-    public ScriptureMemorizer(List<Scripture> scriptures)
+    public Memorizer(List<Scripture> scriptures)
     {
         _scriptures = scriptures;
     }

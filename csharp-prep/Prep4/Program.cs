@@ -9,7 +9,7 @@ class Program
 
         while (userValue != 0)
         {
-            Console.Write("Enter a list of numbers, type 0 to quit: ")
+            Console.Write("Enter a list of numbers, type 0 to quit: ");
             string userInput = Console.ReadLine();
 
             userValue = int.Parse(userInput);
