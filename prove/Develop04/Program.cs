@@ -1,21 +1,77 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
+
+
+namespace MindfulnessProgram;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
+        bool exit = false;
 
-        Menu<string> _menu = new Menu<string>();
-
-                public Activities(string menu)
+        while (!exit)
         {
-            _menu = menu;
+            Console.Clear();
+            Console.WriteLine("Welcome to the Mindfulness Program!");
+            Console.WriteLine("Please choose an option:");
+            Console.WriteLine("1. Start program");
+            Console.WriteLine("2. About");
+            Console.WriteLine("3. Exit");
 
+            int choice = ReadIntInRange("Enter your choice: ", 1, 3);
+
+            switch (choice)
+            {
+                case 1:
+                    MindfulnessProgram.Start();
+                    break;
+                case 2:
+                    About();
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+            }
         }
-        public string GetMenu()
+    }
+
+    static void About()
+    {
+        Console.Clear();
+        Console.WriteLine("About");
+        Console.WriteLine("This program was created to help individuals practice mindfulness and focus on their mental health.");
+        Console.WriteLine("Version 1.0");
+        Console.WriteLine("Author: [Your Name Here]");
+        PauseWithAnimation(5);
+    }
+
+    static int ReadIntInRange(string prompt, int min, int max)
+    {
+        int result;
+
+        while (true)
         {
-            return _menu;
+            Console.Write(prompt);
 
+            if (int.TryParse(Console.ReadLine(), out result) && result >= min && result <= max)
+            {
+                return result;
+            }
+
+            Console.WriteLine($"Invalid input. Enter a number between {min} and {max}.");
         }
+    }
+
+    static void PauseWithAnimation(int seconds)
+    {
+        Console.Write("Starting in ");
+        for (int i = seconds; i >= 1; i--)
+        {
+            Console.Write($"{i}...");
+            Thread.Sleep(1000);
+        }
+        Console.WriteLine();
     }
 }
