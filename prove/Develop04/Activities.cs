@@ -4,7 +4,7 @@ using System.Threading;
 
 class Activities
 {
-    static void Main()
+    static void Main(string[] args)
     {
         bool exit = false;
 
@@ -131,6 +131,8 @@ class Activities
             Console.WriteLine();
         }
     }
+
+    
 
     static int ReadIntInRange(string prompt, int min, int max)
     {
