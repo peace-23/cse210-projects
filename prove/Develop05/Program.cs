@@ -1,7 +1,6 @@
 using System;
+using Develop05;
 
-
-namespace Develop05;
 class Program
 {
     static void Main()

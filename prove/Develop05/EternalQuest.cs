@@ -1,6 +1,7 @@
 using System;
 
 
+
 namespace Develop05
 {
     class EternalQuest : Goal
@@ -14,6 +15,7 @@ namespace Develop05
 
         public EternalQuest()
         {
+           
         }
 
         public void AddGoal(Goal goal)
