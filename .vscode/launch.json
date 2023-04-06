@@ -185,6 +185,20 @@
             "stopAtEntry": false
         },
 
+
+        {
+            "name": "Develop 06 (Goal Tracker)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-prove-Develop06",
+            "program": "${workspaceFolder}/prove/Develop06/bin/Debug/net7.0/Develop06.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/prove/Develop06",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "stopAtEntry": false
+        },
+
         {
             "name": "Final Project (Open ended)",
             "type": "coreclr",

@@ -186,6 +186,19 @@
         },
 
         {
+            "label": "build-prove-Develop06",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/prove/Develop06/Develop06.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+
+        {
             "label": "build-final-FinalProject",
             "command": "dotnet",
             "type": "process",
