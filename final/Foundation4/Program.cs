@@ -1,26 +1,28 @@
 using System;
-using Foundation4;
+using ExerciseTracker;
 
-class Program
-{
-    static void Main(string[] args)
+    class Program
     {
-        Running running = new Running("03 Nov 2023",30,3.0);
-        Cycling cycling = new Cycling("01 May 2023",30,3.9);
-        Swimming swimming = new Swimming("14 Dec 2023",30,5);
-
-        List<Activity> activities = new List<Activity>{
-            running,
-            cycling,
-            swimming
-        };
-
-        foreach (Activity activity in activities)
+        static void Main(string[] args)
         {
-            Console.WriteLine(new string('-',100));
-            Console.WriteLine();
-            Console.WriteLine(activity.getSummary());
-            Console.WriteLine();
+            // create a list of activities
+            List<Activity> activities = new List<Activity>();
+            
+            // add some activities to the list
+            activities.Add(new RunningActivity(DateTime.Parse("2023-01-25"), 30, 9.0));
+            activities.Add(new CyclingActivity(DateTime.Parse("2023-02-15"), 45, 15));
+            activities.Add(new SwimmingActivity(DateTime.Parse("2023-05-09"), 30, 30));
+
+            // iterate through the list and display the summary of each activity
+            foreach (Activity activity in activities)
+            {
+                Console.WriteLine(new string('-', 90));
+                Console.WriteLine();
+                Console.WriteLine(activity.GetSummary());
+                Console.WriteLine();
+                Console.WriteLine(new string('-', 90));
+                Console.WriteLine();
+                
+            }
         }
     }
-}

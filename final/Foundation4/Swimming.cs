@@ -2,43 +2,39 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Foundation4
+namespace ExerciseTracker
 {
-    class Swimming : Activity
+    class SwimmingActivity : Activity
     {
-        private double _laps;
+        private int _laps;
+        private double _length;
 
-        public Swimming(
-            string date,
-            int minutes,
-            double laps
-        ) : base(date,minutes)
+        public SwimmingActivity(DateTime date, int length, int laps) : base(date, length)
         {
-            _laps = laps;
+            this._laps = laps;
+            this._length = length;
         }
 
-        protected override double getDistance()
+        public override double GetDistance()
         {
-            return _laps * 50 / 1000 * 0.62;
+            return _laps * 50.0 / 1000.0;
         }
 
-        protected override double getSpeed()
+        public override double GetSpeed()
         {
-            return (getDistance() / getMinutes()) * 60;
+            double durationInMinutes = (double)_length / 60.0;
+            double speedInKph = GetDistance() / durationInMinutes;
+            return speedInKph;
         }
 
-        protected override double getPace()
+        public override double GetPace()
         {
-            return getMinutes() / getDistance();
+            return _length / GetDistance();
         }
 
-        public override string getSummary() {
-            double pace = Math.Round(getPace(),2);
-            double speed = Math.Round(getSpeed(),2);
-            double distance = Math.Round(getDistance(),2);
-            return $"{getDate()} Swimming ({getMinutes()} min)- Distance {distance} miles, Speed {speed} mph, Pace: {pace} min per mile";
-        }  
-
-
+        public override string GetSummary()
+        {
+            return $"{base.GetSummary()} - Distance {GetDistance().ToString("F1")} km, Speed: {GetSpeed().ToString("F1")} kph, Pace: {GetPace().ToString("F1")} min per mile";
+        }
     }
 }

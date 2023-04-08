@@ -2,51 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Foundation4
+namespace ExerciseTracker
 {
     class Activity
     {
-        private string _date;
-        private int _minutes;
-        public Activity(
-            string date,
-            int minutes
-        ) 
+        private DateTime _date;
+        private int _length;
+
+        public Activity(DateTime date, int length)
         {
-            _date = date;
-            _minutes = minutes;
+            this._date = date;
+            this._length = length;
         }
 
-        protected int getMinutes()
+        public virtual double GetDistance()
         {
-            return _minutes;
+            return 0.0;
         }
 
-        protected string getDate()
+        public virtual double GetSpeed()
         {
-            return _date;
+            return 0.0;
         }
 
-        protected virtual double getDistance()
+        public virtual double GetPace()
         {
-            return new double();
+            return 0.0;
         }
 
-        protected virtual double getSpeed()
+        public virtual string GetSummary()
         {
-            return new double();
+            return $"{_date.ToString("dd MMM yyyy")} {this.GetType().Name} ({_length} min)";
         }
-
-        protected virtual double getPace()
-        {
-            return new double();
-        }
-
-        public virtual string getSummary()
-        {
-            return $"{_date} Running ({_minutes} min)- Distance {0} miles, Speed {0} mph, Pace: {0} min per mile";
-        }
-
-
     }
 }

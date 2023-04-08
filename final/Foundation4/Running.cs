@@ -2,37 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Foundation4
+namespace ExerciseTracker
 {
-    class Running : Activity
+    class RunningActivity : Activity
     {
         private double _distance;
+        private double _length;
 
-        public Running(
-            string date,
-            int minutes,
-            double distance
-        ) : base(date,minutes)
+        public RunningActivity(DateTime date, int length, double distance) : base(date, length)
         {
-            _distance = distance;
+            this._distance = distance;
+            this._length = length;
         }
 
-        protected override double getPace()
+        public override double GetDistance()
         {
-            return getMinutes() / _distance;
+            return _distance;
         }
 
-        protected override double getSpeed()
+        public override double GetSpeed()
         {
-            return (_distance / getMinutes()) * 60;
+            return (_distance / _length) * 60.0;
         }
 
-        public override string getSummary() {
-            double pace = Math.Round(getPace(),2);
-            double speed = Math.Round(getSpeed(),2);
-            return $"{getDate()} Running {getMinutes()} (min)- Distance {Math.Round(_distance,2)} miles, Speed {speed} mph, Pace: {pace} min per mile";
-        }  
+        public override double GetPace()
+        {
+            return _length / _distance;
+        }
 
-
+        public override string GetSummary()
+        {
+            return $"{base.GetSummary()} - Distance {_distance} miles, Speed {GetSpeed().ToString("F1")} mph, Pace: {GetPace().ToString("F1")} min per mile";
+        }
     }
 }
