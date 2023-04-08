@@ -4,42 +4,50 @@ using System.Linq;
 
 public class Scripture
 {
-    private string _reference;
-    private List<Verse> _verses;
+    public string Reference { get; private set; }
+    public string Text { get; private set; }
+    private List<int> hiddenIndices;
 
-    public string Reference
+    public Scripture(string reference, string text)
     {
-        get { return _reference; }
+        Reference = reference;
+        Text = text;
+        hiddenIndices = new List<int>();
     }
 
-    public List<Verse> Verses
+    public Scripture(string reference, string[] verses)
     {
-        get { return _verses; }
+        Reference = reference;
+        Text = String.Join(" ", verses);
+        hiddenIndices = new List<int>();
     }
 
-    public Reference Reference1 { get; }
-    public string V { get; }
-
-    public Scripture(string reference, List<Verse> verses)
+    public int NumHiddenWords()
     {
-        _reference = reference;
-        _verses = verses;
+        return hiddenIndices.Count;
     }
 
-    public Scripture(Reference reference, string v)
+    public bool HideRandomWord()
     {
-        Reference1 = reference;
-        V = v;
+        List<int> availableIndices = Enumerable.Range(0, Text.Length)
+            .Where(i => !hiddenIndices.Contains(i) && Char.IsLetter(Text[i]))
+            .ToList();
+        if (availableIndices.Count == 0)
+        {
+            return false;
+        }
+        int randomIndex = availableIndices[new Random().Next(availableIndices.Count)];
+        hiddenIndices.Add(randomIndex);
+        return true;
+    }
+
+    public string GetVisibleText()
+    {
+        return new String(Text.Select((c, i) => hiddenIndices.Contains(i) ? '_' : c).ToArray());
     }
 
     public override string ToString()
     {
-        string result = "";
-        foreach (Verse verse in _verses)
-        {
-            result += verse.ToString() + " ";
-        }
-        return result.Trim();
+        return $"{Reference}: {GetVisibleText()}";
     }
-    
 }
