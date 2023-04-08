@@ -59,7 +59,7 @@ namespace ProductOrderingSystem
 
         Console.WriteLine(order2.GetPackingLabel());
         Console.WriteLine(order2.GetShippingLabel());
-        Console.WriteLine("Total price: " + order2.CalculateTotalPrice());
+        Console.WriteLine("Total price " + order2.CalculateTotalPrice());
         Console.WriteLine("----------");
         Console.WriteLine();
 

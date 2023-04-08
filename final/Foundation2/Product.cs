@@ -5,14 +5,11 @@ namespace ProductOrderingSystem
 {
     class Product
     {
-        public string _name { get; set; }
-        public string _productId { get; set; }
-        public double _price { get; set; }
-        public int _quantity { get; set; }
-        // private string _name;
-        // private string _productId;
-        // private double _price;
-        // private int _quantity;
+        private string _name { get; set; }
+        private string _productId { get; set; }
+        private double _price { get; set; }
+        private int _quantity { get; set; }
+
 
         public Product(string name, string productId, double price, int quantity)
         {
